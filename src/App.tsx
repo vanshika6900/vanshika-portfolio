@@ -211,12 +211,12 @@ export default function App() {
           >
             <div>
               <Label>EDUCATION</Label>
-              <p className="text-sm opacity-50 mt-1 font-mono uppercase tracking-wider">B.TECH IN COMPUTER SCIENCE<br />UNIVERSITY OF DELHI</p>
+              <p className="text-sm opacity-50 mt-1 font-mono uppercase tracking-wider">B.TECH IN INFORMATION TECHNOLOGY<br />GGSIP UNIVERSITY // GPA 9.2</p>
             </div>
-            <div>
+            {/* <div>
               <Label>LOCATION</Label>
               <p className="text-sm opacity-50 mt-1 font-mono tracking-widest">{RESUME_DATA.location}</p>
-            </div>
+            </div> */}
           </motion.div>
         </div>
 
@@ -255,7 +255,7 @@ export default function App() {
             </motion.a>
           </BentoBox>
 
-          <BentoBox
+          {/* <BentoBox
             onClick={() => setActiveDossier('blogs')}
             className="max-w-md border-white/5 bg-black/40"
           >
@@ -290,7 +290,7 @@ export default function App() {
                 View Archive <MoveUpRight size={10} />
               </button>
             </div>
-          </BentoBox>
+          </BentoBox> */}
         </div>
 
         {/* MIDDLE CENTER: Circular Text Decor */}
@@ -318,22 +318,14 @@ export default function App() {
                 {RESUME_DATA.skills.map((skill, i) => (
                   <div key={i}>
                     <Label>{skill.category}</Label>
-                    <div className="flex flex-col lg:items-end gap-3 mt-3">
+                    <div className="flex flex-wrap lg:justify-end gap-2 mt-3">
                       {skill.items.map((item, j) => (
-                        <div key={j} className="w-full lg:w-48 flex flex-col items-end">
-                          <div className="flex justify-between w-full text-[10px] font-mono opacity-50 uppercase mb-1">
-                            <span>{item}</span>
-                            <span className="text-acid">{(85 + (j * 3)) % 100}%</span>
-                          </div>
-                          <div className="w-full h-[2px] bg-white/5 relative overflow-hidden">
-                            <motion.div
-                              initial={{ scaleX: 0 }}
-                              whileInView={{ scaleX: (85 + (j * 3)) / 100 }}
-                              transition={{ duration: 1.5, delay: 0.1 * j }}
-                              className="absolute inset-0 bg-acid/40 origin-left"
-                            />
-                          </div>
-                        </div>
+                        <span
+                          key={j}
+                          className="text-[10px] font-mono uppercase tracking-wider px-2 py-1 border border-white/10 bg-white/5 rounded-sm opacity-70 hover:border-acid/40 hover:text-acid hover:opacity-100 transition-all"
+                        >
+                          {item}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -381,7 +373,17 @@ export default function App() {
                   <div className="text-acid text-[10px] font-black tracking-[0.3em]">{exp.period}</div>
                   <h4 className="text-xl font-black leading-tight uppercase tracking-tighter">{exp.company}</h4>
                   <p className="text-[10px] text-acid/60 font-bold uppercase tracking-widest">{exp.role}</p>
-                  <p className="text-xs opacity-40 uppercase leading-relaxed font-medium">{exp.desc}</p>
+                  <ul className="space-y-2">
+                    {exp.bullets.map((b, j) => (
+                      <li key={j} className="flex gap-2 text-xs opacity-40 uppercase leading-relaxed font-medium">
+                        <span className="text-acid/60 shrink-0">▸</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {exp.tech.map((t, j) => <span key={j} className="text-[9px] font-mono border border-acid/20 text-acid/60 px-2 py-0.5 rounded-sm">#{t}</span>)}
+                  </div>
                 </div>
               ))}
             </div>
@@ -407,7 +409,14 @@ export default function App() {
                     {proj.tech[0]}
                   </div>
                   <h4 className="text-xl font-black leading-tight uppercase tracking-tighter hover:text-acid transition-colors">{proj.title}</h4>
-                  <p className="text-xs opacity-30 uppercase leading-relaxed font-medium">{proj.desc}</p>
+                  <ul className="space-y-2">
+                    {proj.bullets.map((b, j) => (
+                      <li key={j} className="flex gap-2 text-xs opacity-30 uppercase leading-relaxed font-medium">
+                        <span className="text-white/40 shrink-0">▸</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                   <div className="flex flex-wrap gap-2 pt-2 opacity-20">
                     {proj.tech.slice(1).map((t, j) => <span key={j} className="text-[9px] font-mono border border-white/10 px-2 py-0.5 rounded-sm">#{t}</span>)}
                   </div>
@@ -478,11 +487,16 @@ export default function App() {
                   </div>
                   <ShieldCheck className="text-acid/20" size={32} />
                 </div>
-                <p className="text-lg opacity-60 leading-relaxed uppercase font-medium max-w-2xl text-justify">
-                  {exp.desc} At {exp.company}, I focused on building robust backends that could handle high throughput while maintaining sub-millisecond response times. My role involved close collaboration with frontend and DevOps teams to ensure seamless integration.
-                </p>
+                <ul className="space-y-3 max-w-2xl">
+                  {exp.bullets.map((b, j) => (
+                    <li key={j} className="flex gap-3 text-base md:text-lg opacity-60 leading-relaxed uppercase font-medium">
+                      <span className="text-acid shrink-0">▸</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
                 <div className="flex flex-wrap gap-3 pt-4">
-                  {["MICROSERVICES", "SCALABILITY", "DISTRIBUTED_SYSTEMS"].map(tag => (
+                  {exp.tech.map(tag => (
                     <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-mono opacity-40 uppercase">{tag}</span>
                   ))}
                 </div>
@@ -513,9 +527,14 @@ export default function App() {
                 </div>
               </div>
               <h4 className="text-4xl font-black uppercase tracking-tighter mb-4 group-hover:text-acid transition-colors">{proj.title}</h4>
-              <p className="text-sm opacity-50 uppercase leading-relaxed mb-8 font-medium italic">
-                "{proj.desc} Designed with high availability and fault tolerance as core pillars."
-              </p>
+              <ul className="space-y-3 mb-8">
+                {proj.bullets.map((b, j) => (
+                  <li key={j} className="flex gap-3 text-sm opacity-50 uppercase leading-relaxed font-medium">
+                    <span className="text-acid shrink-0">▸</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
               <div className="mt-auto space-y-6">
                 <div className="flex flex-wrap gap-2">
                   {proj.tech.map(t => (
