@@ -247,7 +247,7 @@ export default function App() {
               </div>
               <div className="flex-grow bg-white/5 p-3 flex flex-col justify-center group-hover:bg-white/10 transition-all">
                 <div className="flex justify-between items-center">
-                  <Label color="text-white/60">ACCESS_DOSSIER.PDF</Label>
+                  <Label color="text-white/60">VIEW_RESUME.PDF</Label>
                   <MoveUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all text-acid" />
                 </div>
                 <p className="text-[8px] font-mono opacity-30 mt-1 uppercase">Cloud repository link established</p>
